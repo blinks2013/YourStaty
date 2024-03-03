@@ -3,6 +3,10 @@ import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { DatabaseService } from './database.service';
 import { Logger } from 'winston';
 import { Sequelize } from 'sequelize-typescript';
+import { PropertyAddressEntity } from 'src/module/property/entity/property_address.entity';
+import { PropertyDetailsEntity } from 'src/module/property/entity/property_details.entity';
+import { PropertyFacilitiesEntity } from 'src/module/property/entity/property_facilities.entity';
+import { PropertySpecificationEntity } from 'src/module/property/entity/property_specification.entity';
 
 export const databaseProvider = [
     {
@@ -25,7 +29,12 @@ export const databaseProvider = [
             );
 
             // Add table modules here...
-            sequelize.addModels([]);
+            sequelize.addModels([
+                PropertyAddressEntity,
+                PropertyDetailsEntity,
+                PropertyFacilitiesEntity,
+                PropertySpecificationEntity
+            ]);
 
             // Sync database with module
             if (environment == 'development') {
