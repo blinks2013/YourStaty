@@ -9,7 +9,6 @@ export class PropertyController{
     constructor(private propertyService: PropertyService){}
     @Post()
     async addPropertyController(@Body() addPropertyInfo: AddPropertyDto){
-        console.log("========",addPropertyInfo);
         return this.propertyService.addPropertyService(addPropertyInfo)
     }
 }
