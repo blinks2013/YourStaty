@@ -8,8 +8,8 @@ export default registerAs(
             host: process.env.DB_HOST || 'localhost',
             port: process.env.DB_PORT || 5432,
             username: process.env.DB_USERNAME || 'postgres',
-            password: process.env.DB_PASSWORD || 'dev1',
-            databaseName: process.env.DB_NAME || 'barterIT_local',
+            password: process.env.DB_PASSWORD || 'root',
+            databaseName: process.env.DB_NAME || 'postgres',
         },
     }),
 );
