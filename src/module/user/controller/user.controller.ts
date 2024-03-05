@@ -13,7 +13,7 @@ export class UserController {
     }
 
     @Post('/otp-verification')
-    async OtpVerficationController(@Body() otpInfo: OtpDto) {
+    async OtpVerificationController(@Body() otpInfo: OtpDto) {
         return this.userService.verifyOtpService(otpInfo.otp, otpInfo.number);
     }
 }
