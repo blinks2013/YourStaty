@@ -19,21 +19,13 @@ export class UserEntity extends Model<UserEntity> {
     @Column({
         type: DataType.UUID,
         primaryKey: true,
-<<<<<<< Updated upstream
         defaultValue: DataType.UUID
-=======
-        defaultValue: DataType.UUIDV4,
->>>>>>> Stashed changes
     })
     public id: string;
 
     @Column({
         type: DataType.STRING,
-<<<<<<< Updated upstream
         allowNull: false
-=======
-        allowNull: true,
->>>>>>> Stashed changes
     })
     public firstName: string;
 

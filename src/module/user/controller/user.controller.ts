@@ -7,12 +7,8 @@ import { OtpDto } from '../dto/otp.dto';
 export class UserController {
     constructor(private userService: UserService) {}
     @Post('/login')
-<<<<<<< Updated upstream
     async userLoginController(@Body() loginInfo: LoginDto) {
         console.log(loginInfo.number);
-=======
-     async userLoginController(@Body() loginInfo: LoginDto){
->>>>>>> Stashed changes
         return this.userService.sendOtpTouser(`${loginInfo.number}`);
     }
 
