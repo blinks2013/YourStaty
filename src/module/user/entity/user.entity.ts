@@ -37,7 +37,8 @@ export class UserEntity extends Model<UserEntity> {
 
     @Column({
         type: DataType.STRING,
-        allowNull:false
+        allowNull:false,
+        unique:true
     })
     public mobileNumber:string
 }

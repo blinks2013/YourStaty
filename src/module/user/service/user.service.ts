@@ -11,6 +11,7 @@ export class UserService{
         private redisService:RedisService,
         private userRepository: UserRepository){}
     async sendOtpTouser(number:string){
+        try{
         let digits = '0123456789';
         let OTP = '';
         for (let i = 0; i < 4; i++) {
@@ -23,15 +24,27 @@ export class UserService{
             from: this.configService.get('service.twilio.PHONE_NUMBER'),
             to : number,
         })
+        return {
+            Message:"otp send to your number"
+        }
+    }catch(err){
+        console.log(err);
+    }
     }
     async verifyOtpService(Otp:string,mobileNumber:string){
         const redisDetails= await this.redisService.getValue(mobileNumber)
         if(redisDetails == Otp){
             await this.redisService.deleteKey(mobileNumber);
+            const getDetails= await this.userRepository.getUser(mobileNumber);
+            if(!getDetails){
             const result=await this.userRepository.addUser(mobileNumber)
             return {
                 message:"user is created succesfully",
                 ...result.dataValues
+            };
+            }
+            return {
+                message:"user login successfully",
             };
         }else{
             throw new HttpExceptionWrapper('please enter valid otp',409);
