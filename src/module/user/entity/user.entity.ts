@@ -15,17 +15,37 @@ const tableOptions: TableOptions = {
 };
 
 @Table(tableOptions)
-export class User extends Model<User> {
+export class UserEntity extends Model<UserEntity> {
     @Column({
         type: DataType.UUID,
         primaryKey: true,
+<<<<<<< Updated upstream
         defaultValue: DataType.UUID
+=======
+        defaultValue: DataType.UUIDV4,
+>>>>>>> Stashed changes
     })
     public id: string;
 
     @Column({
         type: DataType.STRING,
+<<<<<<< Updated upstream
         allowNull: false
+=======
+        allowNull: true,
+>>>>>>> Stashed changes
     })
-    public name: string;
+    public firstName: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true
+    })
+    public lastName:string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull:false
+    })
+    public mobileNumber:string
 }

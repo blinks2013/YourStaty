@@ -7,6 +7,7 @@ import { PropertyAddressEntity } from 'src/module/property/entity/property_addre
 import { PropertyDetailsEntity } from 'src/module/property/entity/property_details.entity';
 import { PropertyFacilitiesEntity } from 'src/module/property/entity/property_facilities.entity';
 import { PropertySpecificationEntity } from 'src/module/property/entity/property_specification.entity';
+import { UserEntity } from 'src/module/user/entity/user.entity';
 
 export const databaseProvider = [
     {
@@ -34,7 +35,8 @@ export const databaseProvider = [
                 PropertyAddressEntity,
                 PropertyDetailsEntity,
                 PropertyFacilitiesEntity,
-                PropertySpecificationEntity
+                PropertySpecificationEntity,
+                UserEntity
             ]);
 
             // Sync database with module

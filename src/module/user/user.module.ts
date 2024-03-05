@@ -6,6 +6,7 @@ import { ServiceGatewayModule } from 'src/service-gateway/service_gateway.module
 import { TwilioModule } from 'nestjs-twilio';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RedisModule } from 'src/utils/redis/redis.module';
+import { UserRepository } from './repository/user.repository';
 
 @Module({
     imports: [PaginationModule, ServiceGatewayModule, RedisModule,TwilioModule.forRootAsync({
@@ -17,7 +18,7 @@ import { RedisModule } from 'src/utils/redis/redis.module';
         inject:[ConfigService]
     })],
     controllers: [UserController],
-    providers: [UserService],
+    providers: [UserService,UserRepository],
     exports: [RedisModule],
 })
 export class UserModule {}

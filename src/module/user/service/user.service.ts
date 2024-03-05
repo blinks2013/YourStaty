@@ -2,11 +2,15 @@ import { Injectable } from "@nestjs/common";
 import { TwilioService } from "nestjs-twilio";
 import { ConfigService } from "@nestjs/config";
 import { RedisService } from "src/utils/redis/redis.service";
+import { UserRepository } from "../repository/user.repository";
+import { HttpExceptionWrapper } from "src/utils/error/error.http.wrapper";
 @Injectable()
 export class UserService{
-    constructor(private twilioService: TwilioService,private configService: ConfigService, private redisService:RedisService){}
+    constructor(private twilioService: TwilioService,
+        private configService: ConfigService,
+        private redisService:RedisService,
+        private userRepository: UserRepository){}
     async sendOtpTouser(number:string){
-        console.log(this.configService.get('service.twilio.PHONE_NUMBER'))
         let digits = '0123456789';
         let OTP = '';
         for (let i = 0; i < 4; i++) {
@@ -24,9 +28,13 @@ export class UserService{
         const redisDetails= await this.redisService.getValue(mobileNumber)
         if(redisDetails == Otp){
             await this.redisService.deleteKey(mobileNumber);
-            return "succesfully login";
+            const result=await this.userRepository.addUser(mobileNumber)
+            return {
+                message:"user is created succesfully",
+                ...result.dataValues
+            };
         }else{
-            return "enter valid otp";
+            throw new HttpExceptionWrapper('please enter valid otp',409);
         }
 
     }
