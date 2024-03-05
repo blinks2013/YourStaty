@@ -1,62 +1,69 @@
-import { Column, Model, DataType, ForeignKey, BelongsTo, Table } from "sequelize-typescript";
-import { PropertyDetailsEntity } from "./property_details.entity";
+import {
+    Column,
+    Model,
+    DataType,
+    ForeignKey,
+    BelongsTo,
+    Table
+} from 'sequelize-typescript';
+import { PropertyDetailsEntity } from './property_details.entity';
 
 @Table({
-    tableName:'propertySpecification',
-    createdAt:true,
-    updatedAt:false,
+    tableName: 'propertySpecification',
+    createdAt: true,
+    updatedAt: false
 })
-export class PropertySpecificationEntity extends Model<PropertySpecificationEntity>{
+export class PropertySpecificationEntity extends Model<PropertySpecificationEntity> {
     @Column({
         type: DataType.UUID,
-        primaryKey:true,
+        primaryKey: true,
         defaultValue: DataType.UUIDV4
     })
-    public id:string;
+    public id: string;
 
-    @ForeignKey(()=> PropertyDetailsEntity)
+    @ForeignKey(() => PropertyDetailsEntity)
     @Column({
         type: DataType.UUID,
         allowNull: false
     })
-    public propertyId:string;
+    public propertyId: string;
 
     @Column({
         type: DataType.INTEGER,
-        allowNull:false
+        allowNull: false
     })
-    public bedRooms:number;
+    public bedRooms: number;
 
     @Column({
         type: DataType.INTEGER,
-        allowNull:false
+        allowNull: false
     })
-    public bathRooms:number;
+    public bathRooms: number;
 
     @Column({
         type: DataType.INTEGER,
-        allowNull:false
+        allowNull: false
     })
-    public length:number;
+    public length: number;
 
     @Column({
         type: DataType.INTEGER,
-        allowNull:false
+        allowNull: false
     })
-    public breadth:number;
+    public breadth: number;
 
     @Column({
         type: DataType.STRING,
-        allowNull:false
+        allowNull: false
     })
-    public unit:string;
+    public unit: string;
 
     @Column({
         type: DataType.FLOAT,
-        allowNull:false
+        allowNull: false
     })
-    public carpetArea:number
+    public carpetArea: number;
 
-    @BelongsTo(()=> PropertyDetailsEntity)
-    propertyDetails: PropertyDetailsEntity
+    @BelongsTo(() => PropertyDetailsEntity)
+    propertyDetails: PropertyDetailsEntity;
 }

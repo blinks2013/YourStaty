@@ -3,7 +3,7 @@ import {
     DataType,
     Model,
     Table,
-    TableOptions,
+    TableOptions
 } from 'sequelize-typescript';
 
 const tableOptions: TableOptions = {
@@ -11,7 +11,7 @@ const tableOptions: TableOptions = {
     underscored: true,
     timestamps: true,
     createdAt: 'created_at',
-    updatedAt: 'updated_at',
+    updatedAt: 'updated_at'
 };
 
 @Table(tableOptions)
@@ -19,13 +19,13 @@ export class User extends Model<User> {
     @Column({
         type: DataType.UUID,
         primaryKey: true,
-        defaultValue: DataType.UUID,
+        defaultValue: DataType.UUID
     })
     public id: string;
 
     @Column({
         type: DataType.STRING,
-        allowNull: false,
+        allowNull: false
     })
     public name: string;
 }

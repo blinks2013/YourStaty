@@ -1,62 +1,69 @@
-import { Column,Model,DataType, ForeignKey, BelongsTo, Table } from "sequelize-typescript";
-import { PropertyDetailsEntity } from "./property_details.entity";
+import {
+    Column,
+    Model,
+    DataType,
+    ForeignKey,
+    BelongsTo,
+    Table
+} from 'sequelize-typescript';
+import { PropertyDetailsEntity } from './property_details.entity';
 
 @Table({
-    tableName:'propertyFacilities',
-    createdAt:true,
-    updatedAt:false,
+    tableName: 'propertyFacilities',
+    createdAt: true,
+    updatedAt: false
 })
-export class PropertyFacilitiesEntity extends Model<PropertyFacilitiesEntity>{
-    @Column({
-        type:DataType.UUID,
-        primaryKey:true,
-        defaultValue: DataType.UUIDV4
-    })
-    public id:string;
-
-    @ForeignKey(()=>PropertyDetailsEntity)
+export class PropertyFacilitiesEntity extends Model<PropertyFacilitiesEntity> {
     @Column({
         type: DataType.UUID,
-        allowNull:false
+        primaryKey: true,
+        defaultValue: DataType.UUIDV4
     })
-    public propertyId:string;
+    public id: string;
+
+    @ForeignKey(() => PropertyDetailsEntity)
+    @Column({
+        type: DataType.UUID,
+        allowNull: false
+    })
+    public propertyId: string;
 
     @Column({
         type: DataType.BOOLEAN,
-        defaultValue:false  
+        defaultValue: false
     })
-    public freeWifi:boolean;
+    public freeWifi: boolean;
 
     @Column({
         type: DataType.BOOLEAN,
-        defaultValue:false  
+        defaultValue: false
     })
-    public airConditioning:boolean;
+    public airConditioning: boolean;
 
     @Column({
         type: DataType.BOOLEAN,
-        defaultValue:false  
+        defaultValue: false
     })
-    public parking:boolean;
+    public parking: boolean;
 
     @Column({
         type: DataType.BOOLEAN,
-        defaultValue:false  
+        defaultValue: false
     })
-    public television:boolean;
+    public television: boolean;
 
     @Column({
         type: DataType.BOOLEAN,
-        defaultValue:false  
+        defaultValue: false
     })
     public laundry: boolean;
 
     @Column({
         type: DataType.BOOLEAN,
-        defaultValue:false  
+        defaultValue: false
     })
     public kitchen: boolean;
 
-    @BelongsTo(()=> PropertyDetailsEntity)
-    propertyDetails: PropertyDetailsEntity
+    @BelongsTo(() => PropertyDetailsEntity)
+    propertyDetails: PropertyDetailsEntity;
 }

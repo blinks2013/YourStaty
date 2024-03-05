@@ -15,7 +15,7 @@ export class UserController {
     constructor(
         private userService: UserService,
         @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
-        private paginationService: PaginationService,
+        private paginationService: PaginationService
     ) {}
 
     @ResponseCustom(responseName.USER_CREATED)
@@ -26,8 +26,8 @@ export class UserController {
         throw new HttpExceptionWrapper(errorName.CUSTOM_COMMON_ERROR, [
             {
                 field: 'email',
-                error: 'email already exists',
-            },
+                error: 'email already exists'
+            }
         ]);
 
         return;
@@ -39,7 +39,7 @@ export class UserController {
 
         return {
             data: ['pagination'],
-            metadata,
+            metadata
         };
     }
 
@@ -52,8 +52,8 @@ export class UserController {
         throw new HttpExceptionWrapper(errorName.CUSTOM_COMMON_ERROR, [
             {
                 field: 'email',
-                error: 'email already exists',
-            },
+                error: 'email already exists'
+            }
         ]);
 
         // Http Error

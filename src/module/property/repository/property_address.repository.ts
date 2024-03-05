@@ -1,7 +1,4 @@
-import { Injectable } from "@nestjs/common";
-import { PropertyAddressEntity } from "../entity/property_address.entity";
-import { PropertyAddressDto } from "../dto/property_address.dto";
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class PropertyAddressRepository{
-}
+export class PropertyAddressRepository {}

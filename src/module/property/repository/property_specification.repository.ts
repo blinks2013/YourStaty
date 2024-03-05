@@ -1,7 +1,4 @@
-import { Injectable } from "@nestjs/common";
-import { PropertySpecificationEntity } from "../entity/property_specification.entity";
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class PropertySpecificationRepository{
-    
-}
+export class PropertySpecificationRepository {}

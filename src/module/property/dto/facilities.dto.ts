@@ -1,6 +1,6 @@
-import { IsIn, IsOptional } from "class-validator";
+import { IsIn, IsOptional } from 'class-validator';
 
-export class FacilitiesDto{
+export class FacilitiesDto {
     @IsOptional()
     @IsIn([true])
     freeWifi: boolean;
@@ -11,18 +11,17 @@ export class FacilitiesDto{
 
     @IsOptional()
     @IsIn([true])
-    parking:boolean;
+    parking: boolean;
 
     @IsOptional()
     @IsIn([true])
-    television:boolean;
+    television: boolean;
 
     @IsOptional()
     @IsIn([true])
-    laundry:boolean;
+    laundry: boolean;
 
     @IsOptional()
     @IsIn([true])
-    kitchen:boolean;
-
+    kitchen: boolean;
 }

@@ -15,7 +15,7 @@ export const databaseProvider = [
         useFactory: async (
             logger: Logger,
             configService: ConfigService,
-            databaseService: DatabaseService,
+            databaseService: DatabaseService
         ) => {
             const environment = configService.get('app.env')!;
             const sequelize = new Sequelize(
@@ -24,8 +24,9 @@ export const databaseProvider = [
                 configService.get('database.postgres.password')!,
                 {
                     host: configService.get('database.postgres.host')!,
-                    dialect: configService.get('database.postgres.dialect')!,
-                },
+                    port: configService.get('database.postgres.port')!,
+                    dialect: configService.get('database.postgres.dialect')!
+                }
             );
 
             // Add table modules here...
@@ -38,20 +39,13 @@ export const databaseProvider = [
 
             // Sync database with module
             if (environment == 'development') {
-                await sequelize.sync();
+                //await sequelize.sync();
             } else {
-                await sequelize.sync({ alter: true });
+                //await sequelize.sync({ alter: true });
             }
 
             try {
                 await sequelize.authenticate({});
-
-                // logger.info('Database connected successfully', {
-                //     database: sequelize.config.database,
-                //     username: sequelize.config.username,
-                //     host: sequelize.config.host,
-                //     port: sequelize.config.port,
-                // });
 
                 // Seeding data
                 await databaseService.seedingData();
@@ -59,6 +53,6 @@ export const databaseProvider = [
                 logger.error(error);
             }
             return sequelize;
-        },
-    },
+        }
+    }
 ];
