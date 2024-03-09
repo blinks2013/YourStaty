@@ -6,6 +6,7 @@ import { PropertyDetailsRepository } from './repository/property_details.reposit
 import { PropertyFacilitiesRepository } from './repository/property_facilities.repository';
 import { PropertySpecificationRepository } from './repository/property_specification.repository';
 import { DatabaseModule } from 'src/database/database.module';
+import { PropertyReviewRepository } from './repository/property_review.repository';
 
 @Module({
     imports: [DatabaseModule],
@@ -15,7 +16,8 @@ import { DatabaseModule } from 'src/database/database.module';
         PropertyAddressRepository,
         PropertyFacilitiesRepository,
         PropertyDetailsRepository,
-        PropertySpecificationRepository
+        PropertySpecificationRepository,
+        PropertyReviewRepository
     ],
     exports: []
 })

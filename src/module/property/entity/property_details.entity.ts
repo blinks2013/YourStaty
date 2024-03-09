@@ -5,7 +5,8 @@ import {
     ForeignKey,
     BelongsTo,
     HasOne,
-    Table
+    Table,
+    HasMany
 } from 'sequelize-typescript';
 import { PropertyAddressEntity } from './property_address.entity';
 import { PropertyFacilitiesEntity } from './property_facilities.entity';
@@ -14,6 +15,7 @@ import {
     PropertyCategoryEnum,
     PropertyStatusEnum
 } from '../enum/property.enum';
+import { PropertyReviewEntity } from './property_review.entity';
 
 @Table({
     tableName: 'propertyDetails',
@@ -103,4 +105,7 @@ export class PropertyDetailsEntity extends Model<PropertyDetailsEntity> {
 
     @HasOne(() => PropertySpecificationEntity)
     propertySpecification: PropertySpecificationEntity;
+
+    @HasMany(()=>PropertyReviewEntity)
+    propertyReview: PropertyReviewEntity
 }

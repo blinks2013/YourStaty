@@ -54,7 +54,11 @@ export class UserService{
     }
 
     async updateUserProfileService(updateUserProfileInfo: UpdateUserProfileDTO){
-        return this.userRepository.updateUserProfileRepository(updateUserProfileInfo)
+        return this.userRepository.updateUserProfile(updateUserProfileInfo)
+    }
+
+    async getUserProfileService(id:string){
+        return await this.userRepository.getUserProfile(id)
     }
 }
 

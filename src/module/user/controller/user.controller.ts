@@ -1,9 +1,10 @@
-import { Body, Controller, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Patch, Post,Get, Param, Query } from '@nestjs/common';
 import { LoginDto } from '../dto/login.dto';
 import { UserService } from '../service/user.service';
 import { OtpDto } from '../dto/otp.dto';
 import { UpdateUserProfileDTO } from '../dto/update_userProfile.dto';
 import { HttpExceptionWrapper } from 'src/utils/error/error.http.wrapper';
+import { IsUUidOrNotDto } from 'src/module/property/dto/check_id_is_uuid.dto';
 
 @Controller()
 export class UserController {
@@ -29,6 +30,19 @@ export class UserController {
             }
         }{
             throw new HttpExceptionWrapper("User does not exist",404);
+        }
+    }
+
+    @Get()
+    async getUserProfileController(@Query() userId:IsUUidOrNotDto){
+        const userProfile = await this.userService.getUserProfileService(userId.id)
+        if(userProfile){
+            return {
+                message:'User Profile',
+                data:userProfile
+            }
+        }else{
+            throw new HttpExceptionWrapper('User does not exist',404)
         }
     }
 }

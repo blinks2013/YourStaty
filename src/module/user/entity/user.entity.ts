@@ -1,11 +1,14 @@
 import {
     Column,
     DataType,
+    HasMany,
     Model,
     Table,
     TableOptions
 } from 'sequelize-typescript';
-import { Col } from 'sequelize/types/utils';
+import { PropertyReviewEntity } from 'src/module/property/entity/property_review.entity';
+
+
 
 const tableOptions: TableOptions = {
     tableName: 'user',
@@ -19,8 +22,8 @@ const tableOptions: TableOptions = {
 export class UserEntity extends Model<UserEntity> {
     @Column({
         type: DataType.UUID,
-        primaryKey: true,
-        defaultValue: DataType.UUID
+        primaryKey:true,
+        defaultValue: DataType.UUIDV4
     })
     public id: string;
 
@@ -49,4 +52,13 @@ export class UserEntity extends Model<UserEntity> {
         unique:true,
     })
     public idProof:string;
+
+    @Column({
+        type:DataType.BOOLEAN,
+        defaultValue:false
+    })
+    public statusComplete: boolean
+
+    @HasMany(()=> PropertyReviewEntity)
+    propertyReview: PropertyReviewEntity
 }
