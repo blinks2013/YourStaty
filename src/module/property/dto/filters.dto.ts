@@ -1,4 +1,4 @@
-import { IsLatitude, IsLongitude, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsLatitude, IsLongitude, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, Min } from "class-validator";
 
 export class FilterDto{
 
@@ -10,13 +10,15 @@ export class FilterDto{
     @IsNotEmpty()
     longitude:number;
 
-    @IsNumber()
     @IsOptional()
-    minPrice:number;
+    @IsNumber()
+    @Min(0)
+    minPrice?:number;
 
-    @IsNumber()
     @IsOptional()
-    maxPrice:number;
+    @IsNumber()
+    @Min(0)
+    maxPrice?:number;
 
     @IsString()
     @IsOptional()

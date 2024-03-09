@@ -43,6 +43,8 @@ export class PropertyDetailsRepository {
                 propertyId: propertyDetails.id
             });
             await transaction.commit();
+
+            return {propertyDetails,addressDetails};
         } catch (err) {
             await transaction.rollback();
             console.log(err);
