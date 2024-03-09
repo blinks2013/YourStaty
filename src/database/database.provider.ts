@@ -8,6 +8,8 @@ import { PropertyDetailsEntity } from 'src/module/property/entity/property_detai
 import { PropertyFacilitiesEntity } from 'src/module/property/entity/property_facilities.entity';
 import { PropertySpecificationEntity } from 'src/module/property/entity/property_specification.entity';
 import { UserEntity } from 'src/module/user/entity/user.entity';
+import { truncateSync } from 'fs';
+import { PropertyReviewEntity } from 'src/module/property/entity/property_review.entity';
 
 export const databaseProvider = [
     {
@@ -36,13 +38,14 @@ export const databaseProvider = [
                 PropertyDetailsEntity,
                 PropertyFacilitiesEntity,
                 PropertySpecificationEntity,
-                UserEntity
+                UserEntity,
+                PropertyReviewEntity
             ]);
 
             // Sync database with module
             if (environment == 'development') {
-                //await sequelize.sync();
-                await UserEntity.sync({alter:true})
+                await sequelize.sync({alter:true});
+                //await UserEntity.sync({alter:true})
             } else {
                 //await sequelize.sync({ alter: true });
             }
