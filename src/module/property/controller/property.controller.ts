@@ -1,6 +1,7 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { AddPropertyDto } from '../dto/add_property.dto';
 import { PropertyService } from '../service/property.service';
+import { FilterDto } from '../dto/filters.dto';
 
 @Controller()
 export class PropertyController {
@@ -11,7 +12,7 @@ export class PropertyController {
     }
 
     @Get()
-    async getAllProperties() {
-        return await this.propertyService.getAllProperties();
+    async getAllProperties(@Query() filters:FilterDto) {
+        return await this.propertyService.getAllProperties(filters);
     }
 }

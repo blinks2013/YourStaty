@@ -5,6 +5,7 @@ import { PropertyAddressEntity } from '../entity/property_address.entity';
 import { PropertyFacilitiesRepository } from '../repository/property_facilities.repository';
 import { PropertySpecificationRepository } from '../repository/property_specification.repository';
 import { PropertyAddressRepository } from '../repository/property_address.repository';
+import { FilterDto } from '../dto/filters.dto';
 
 @Injectable()
 export class PropertyService {
@@ -20,7 +21,7 @@ export class PropertyService {
         );
     }
 
-    async getAllProperties() {
-        return await this.propertyDetailsRepository.getAllProperties();
+    async getAllProperties(filters:FilterDto) {
+        return await this.propertyDetailsRepository.getAllProperties(filters);
     }
 }
