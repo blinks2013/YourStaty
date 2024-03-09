@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserEntity } from '../entity/user.entity';
 import { Op } from 'sequelize';
+import { UpdateUserProfileDTO } from '../dto/update_userProfile.dto';
 
 // user repository setup
 @Injectable()
@@ -16,6 +17,16 @@ export class UserRepository {
             where:{
                 mobileNumber:{
                     [Op.eq]:mobileNumber
+                }
+            }
+        })
+    }
+
+    async updateUserProfileRepository(updateUserProfileInfo:UpdateUserProfileDTO){
+        return UserEntity.update(updateUserProfileInfo,{
+            where:{
+                id:{
+                    [Op.eq]:updateUserProfileInfo.userId
                 }
             }
         })

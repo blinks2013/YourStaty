@@ -42,6 +42,7 @@ export const databaseProvider = [
             // Sync database with module
             if (environment == 'development') {
                 //await sequelize.sync();
+                await UserEntity.sync({alter:true})
             } else {
                 //await sequelize.sync({ alter: true });
             }

@@ -5,6 +5,7 @@ import {
     Table,
     TableOptions
 } from 'sequelize-typescript';
+import { Col } from 'sequelize/types/utils';
 
 const tableOptions: TableOptions = {
     tableName: 'user',
@@ -25,15 +26,15 @@ export class UserEntity extends Model<UserEntity> {
 
     @Column({
         type: DataType.STRING,
-        allowNull: false
-    })
-    public firstName: string;
-
-    @Column({
-        type: DataType.STRING,
         allowNull: true
     })
-    public lastName:string;
+    public name: string;
+    
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    public email:string;
 
     @Column({
         type: DataType.STRING,
@@ -41,4 +42,11 @@ export class UserEntity extends Model<UserEntity> {
         unique:true
     })
     public mobileNumber:string
+
+    @Column({
+        type:DataType.STRING,
+        allowNull:true,
+        unique:true,
+    })
+    public idProof:string;
 }

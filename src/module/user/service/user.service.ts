@@ -4,6 +4,7 @@ import { ConfigService } from "@nestjs/config";
 import { RedisService } from "src/utils/redis/redis.service";
 import { UserRepository } from "../repository/user.repository";
 import { HttpExceptionWrapper } from "src/utils/error/error.http.wrapper";
+import { UpdateUserProfileDTO } from "../dto/update_userProfile.dto";
 @Injectable()
 export class UserService{
     constructor(private twilioService: TwilioService,
@@ -50,6 +51,10 @@ export class UserService{
             throw new HttpExceptionWrapper('please enter valid otp',409);
         }
 
+    }
+
+    async updateUserProfileService(updateUserProfileInfo: UpdateUserProfileDTO){
+        return this.userRepository.updateUserProfileRepository(updateUserProfileInfo)
     }
 }
 
