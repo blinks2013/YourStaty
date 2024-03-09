@@ -7,6 +7,12 @@ export enum PropertyCategoryEnum{
 
 export enum PropertyStatusEnum{
     AVAILABLE='AVAILABLE',
-    OCCUPIED='OCCUPIED',
+    SOLDOUT='SOLDOUT',
     COMMING_SOON='COMMING SOON'
+}
+
+export enum PropertyTagEnum{
+    RECOMMENDED='RECOMMENDED',
+    POPULAR='POPULAR',
+    NEWLYLISTED='NEWLYLISTED',
 }

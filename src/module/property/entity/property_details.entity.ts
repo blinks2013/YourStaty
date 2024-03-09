@@ -13,7 +13,8 @@ import { PropertyFacilitiesEntity } from './property_facilities.entity';
 import { PropertySpecificationEntity } from './property_specification.entity';
 import {
     PropertyCategoryEnum,
-    PropertyStatusEnum
+    PropertyStatusEnum,
+    PropertyTagEnum
 } from '../enum/property.enum';
 import { PropertyReviewEntity } from './property_review.entity';
 
@@ -73,7 +74,7 @@ export class PropertyDetailsEntity extends Model<PropertyDetailsEntity> {
     public termsAndCondition: string;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.STRING(10000),
         allowNull: false
     })
     public images: string;
@@ -89,6 +90,12 @@ export class PropertyDetailsEntity extends Model<PropertyDetailsEntity> {
         allowNull: false
     })
     public status: PropertyStatusEnum;
+
+    @Column({
+        type: DataType.ENUM(...Object.values(PropertyTagEnum)),
+        allowNull: false,
+    })
+    public tag: PropertyTagEnum;
 
     @ForeignKey(() => PropertyAddressEntity)
     @Column({

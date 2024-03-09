@@ -7,6 +7,7 @@ import { AddPropertyDto } from '../dto/add_property.dto';
 import { Sequelize } from 'sequelize-typescript';
 import { FilterDto } from '../dto/filters.dto';
 import { Op, OrderItem } from 'sequelize';
+import { PropertyReviewEntity } from '../entity/property_review.entity';
 
 @Injectable()
 export class PropertyDetailsRepository {
@@ -43,7 +44,7 @@ export class PropertyDetailsRepository {
                 propertyId: propertyDetails.id
             });
             await transaction.commit();
-
+            
             return {propertyDetails,addressDetails};
         } catch (err) {
             await transaction.rollback();
@@ -80,7 +81,7 @@ export class PropertyDetailsRepository {
                 ...(filters.propertyCategory
                     ? {
                         category: {
-                            [Op.in]: [filters.propertyCategory],
+                            [Op.in]: filters.propertyCategory.split(','),
                         },
                     }
                     : {}),
@@ -88,7 +89,7 @@ export class PropertyDetailsRepository {
                 ...(filters.bhkType
                     ? {
                         bhk: {
-                            [Op.in]: [filters.bhkType],
+                            [Op.in]: filters.bhkType.split(','),
                         },
                     }
                     : {}),
@@ -96,9 +97,78 @@ export class PropertyDetailsRepository {
             order: order,
         });
     }
+
+    async getPropertyById(id:string){
+        return await PropertyDetailsEntity.findOne({
+            include:[{
+                model:PropertyAddressEntity
+            },{
+                model: PropertyFacilitiesEntity
+            },{
+                model: PropertySpecificationEntity
+            },{
+                model: PropertyReviewEntity
+            }],
+            where:{
+                id
+            }
+        })
+    }
+
+    async getHomePageDetails(filters: FilterDto){
+        const popularDistance = 100;
+        const recommendedDistance=20;
+        const sequelize = PropertyDetailsEntity.sequelize;
+        const haversineFormula = sequelize.literal(
+            `6371 * acos(cos(radians(${filters.latitude})) * cos(radians("propertyAddress"."latitude")) 
+            * cos(radians("propertyAddress"."longitude") - radians(${filters.longitude})) + sin(radians(${filters.latitude})) 
+            * sin(radians("propertyAddress"."latitude")))`
+        );
+
+        const popularProperties=await PropertyDetailsEntity.findAll({
+            include: [
+                {
+                    model: PropertyAddressEntity,
+                    as: 'propertyAddress',
+                    where: sequelize.where(haversineFormula, '<=', popularDistance),
+                }
+            ],
+            where:{
+                ...(filters.propertyCategory
+                    ? {
+                        category: {
+                            [Op.in]: filters.propertyCategory.split(','),
+                        },
+                    }
+                    : {}),
+            }
+        });
+
+        const recommendedProperties=await PropertyDetailsEntity.findAll({
+            include: [
+                {
+                    model: PropertyAddressEntity,
+                    as: 'propertyAddress',
+                    where: sequelize.where(haversineFormula, '<=', recommendedDistance),
+                }
+            ],
+            where:{
+                ...(filters.propertyCategory
+                    ? {
+                        category: {
+                            [Op.in]: filters.propertyCategory.split(','),
+                        },
+                    }
+                    : {}),
+            }
+        });
+
+        return {popularProperties,recommendedProperties}
+    }
     
     
     private async formatSorting(sortBy: string): Promise<OrderItem[]> {
+        console.log('sortBy',sortBy);
         const order: OrderItem[] = [];
     
         if (sortBy && /^(.*):(ASC|DESC)$/i.test(sortBy)) {

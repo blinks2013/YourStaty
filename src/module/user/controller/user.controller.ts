@@ -11,7 +11,6 @@ export class UserController {
     constructor(private userService: UserService) {}
     @Post('/login')
     async userLoginController(@Body() loginInfo: LoginDto) {
-        console.log(loginInfo.number);
         return this.userService.sendOtpTouser(`${loginInfo.number}`);
     }
 

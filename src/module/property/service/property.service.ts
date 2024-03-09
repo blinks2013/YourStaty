@@ -24,6 +24,14 @@ export class PropertyService {
     }
 
     async getAllProperties(filters:FilterDto) {
+        if(filters.isHomePage==='true'){
+            return await this.propertyDetailsRepository.getHomePageDetails(filters);
+        }
+
+        if(filters.propertyId){
+            return await this.propertyDetailsRepository.getPropertyById(filters.propertyId);
+        }
+
         return await this.propertyDetailsRepository.getAllProperties(filters);
     }
 

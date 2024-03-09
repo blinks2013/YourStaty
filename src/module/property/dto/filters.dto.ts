@@ -1,13 +1,20 @@
-import { IsLatitude, IsLongitude, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsPositive, IsString, Min } from "class-validator";
+import { IsBoolean, IsIn, IsLatitude, IsLongitude, IsNumberString, IsOptional, IsPositive, IsString, IsUUID, ValidateIf} from "class-validator";
 
 export class FilterDto{
+    @IsOptional()
+    @IsUUID()
+    propertyId:string;
+
+    @IsOptional()
+    @IsIn(['true','false'])
+    isHomePage:string;
 
     @IsLatitude()
-    @IsNotEmpty()
+    @ValidateIf((value)=>value.isHomePage!=undefined)
     latitude:number;
 
     @IsLongitude()
-    @IsNotEmpty()
+    @ValidateIf((value)=>value.isHomePage!=undefined)
     longitude:number;
 
     @IsOptional()
@@ -18,14 +25,17 @@ export class FilterDto{
     @IsNumberString()
     maxPrice?:string;
 
-    @IsString()
     @IsOptional()
-    propertyCategory:string;
-
     @IsString()
-    @IsOptional()
-    bhkType:string;
+    propertyCategory?:string;
 
+    @IsOptional()
+    @IsString()
+    bhkType?:string;
+
+    @IsOptional()
+    @IsString()
+    sortBy?:string;
 
     //It has chalange to implement
     // @IsString()
@@ -36,8 +46,4 @@ export class FilterDto{
     // @IsString()
     // @IsOptional()
     // ratings:string;
-
-    @IsString()
-    @IsOptional()
-    sortBy:string;
 }
