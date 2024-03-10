@@ -12,12 +12,14 @@ import { validateContactNumber } from "src/module/user/constants/country-code.co
           propertyName: propertyName,
           constraints: [],
           validator: {
-              validate(value : any, arg: ValidationArguments){
-                  const contactNumber=validateContactNumber(arg);
-                  return true;
+              async validate(value : any, arg: ValidationArguments){
+                  const contactNumber= await validateContactNumber(arg.object);
+                  if(contactNumber){
+                    return true;
+                  }
               },
               defaultMessage(){
-                return "please enter valid moblie number,number must be  start with +966"
+                return "please enter a valid coutry code ,code and number"
               }
           },
       });

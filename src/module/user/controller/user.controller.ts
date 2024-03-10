@@ -11,12 +11,12 @@ export class UserController {
     constructor(private userService: UserService) {}
     @Post('/login')
     async userLoginController(@Body() loginInfo: LoginDto) {
-        return this.userService.sendOtpTouser(`${loginInfo.number}`);
+        return this.userService.sendOtpTouser(loginInfo);
     }
 
     @Post('/otp-verification')
     async OtpVerificationController(@Body() otpInfo: OtpDto) {
-        return this.userService.verifyOtpService(otpInfo.otp, otpInfo.number);
+        return this.userService.verifyOtpService(otpInfo);
     }
 
     @Patch()

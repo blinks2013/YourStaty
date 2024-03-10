@@ -131,6 +131,8 @@ export class PropertyDetailsRepository {
                     model: PropertyAddressEntity,
                     as: 'propertyAddress',
                     where: sequelize.where(haversineFormula, '<=', popularDistance),
+                },{
+                    model: PropertySpecificationEntity
                 }
             ],
             where:{
@@ -150,6 +152,8 @@ export class PropertyDetailsRepository {
                     model: PropertyAddressEntity,
                     as: 'propertyAddress',
                     where: sequelize.where(haversineFormula, '<=', recommendedDistance),
+                },{
+                    model:PropertySpecificationEntity,
                 }
             ],
             where:{

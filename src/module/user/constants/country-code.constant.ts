@@ -151,6 +151,19 @@ const contactList=[
         {code: "+263", length: 9, countryCode: "ZW"}
 ]
 
-export async function validateContactNumber(data : any) {
-    contactList.find(data);
+export async function validateContactNumber(loginDto : any) {
+    const result=contactList.find((data)=>{
+        if(data.countryCode === loginDto.countryCode){
+            return data;
+        }
+    }); 
+    if(result){
+        if(loginDto.number.length === result.length && loginDto.code==result.code){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return  false;
+    }
 }

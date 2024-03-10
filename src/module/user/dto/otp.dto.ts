@@ -1,4 +1,4 @@
-import { IsMobilePhone, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsMobilePhone, IsNotEmpty, IsNumber, IsString,IsUppercase } from "class-validator";
 import { IsSaudiNumber } from "src/utils/custom-validator/is_saudi_number.validator";
 
 export class OtpDto{
@@ -10,4 +10,13 @@ export class OtpDto{
     @IsString()
     @IsSaudiNumber()
     number:string
+
+    @IsNotEmpty()
+    @IsString()
+    @IsUppercase()
+    public countryCode:string;
+
+    @IsNotEmpty()
+    @IsString()
+    public code: string;
 }
