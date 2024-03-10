@@ -27,7 +27,8 @@ export class UserService{
         //     to : number,
         // })
         return {
-            Message:"otp send to your number"
+            Message:"otp send to your number",
+            status:"success",
         }
     }catch(err){
         console.log(err);
@@ -42,11 +43,12 @@ export class UserService{
             const result=await this.userRepository.addUser(mobileNumber)
             return {
                 message:"user is created succesfully",
-                ...result.dataValues
+                data:result.dataValues
             };
             }
             return {
                 message:"user login successfully",
+                data:getDetails
             };
         }else{
             throw new HttpExceptionWrapper('please enter valid otp',409);

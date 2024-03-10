@@ -28,7 +28,7 @@ export class UserController {
                 data: updateUserProfileInfo
             }
         }{
-            throw new HttpExceptionWrapper("User does not exist",404);
+            return new HttpExceptionWrapper("User does not exist",404);
         }
     }
 
