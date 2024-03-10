@@ -22,15 +22,26 @@ export class UserRepository {
         })
     }
 
-    async updateUserProfile(updateUserProfileInfo:UpdateUserProfileDTO){
-        return await UserEntity.update({...updateUserProfileInfo, statusComplete:true},{
+    async getUserById(id:string){
+        return await UserEntity.findOne({
             where:{
-                id:{
-                    [Op.eq]:updateUserProfileInfo.userId
-                }
+                id
             }
         })
     }
+
+    async updateUserProfile(updateUserProfileInfo:UpdateUserProfileDTO){
+        await UserEntity.update({...updateUserProfileInfo, statusComplete:true},{
+            where:{
+                id:{
+                    [Op.eq]:updateUserProfileInfo.id
+                }
+            }
+        })
+
+        return await this.getUserById(updateUserProfileInfo.id);
+    }
+    
     async getUserProfile(id:string){
         return await UserEntity.findOne({
             where:{

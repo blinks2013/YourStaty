@@ -22,10 +22,10 @@ export class UserController {
     @Patch()
     async updateUserProfileController(@Body() updateUserProfileInfo: UpdateUserProfileDTO){
         const updateProfile = await this.userService.updateUserProfileService(updateUserProfileInfo);
-        if( updateProfile.length===1){
+        if(updateProfile){
             return {
                 message:"Your profile is updated successfully",
-                data: updateUserProfileInfo
+                data: updateProfile
             }
         }{
             return new HttpExceptionWrapper("User does not exist",404);

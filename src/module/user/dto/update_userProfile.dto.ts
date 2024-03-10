@@ -3,7 +3,7 @@ import { IsAlphanumeric, IsEmail, IsNotEmpty, IsOptional, IsString, IsUUID, IsMo
 export class UpdateUserProfileDTO {
     @IsNotEmpty()
     @IsUUID()
-    public userId:string;
+    public id:string;
 
     @IsNotEmpty()
     @IsString()
