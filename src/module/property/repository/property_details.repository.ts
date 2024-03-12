@@ -8,6 +8,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { FilterDto } from '../dto/filters.dto';
 import { Op, OrderItem } from 'sequelize';
 import { PropertyReviewEntity } from '../entity/property_review.entity';
+import { PropertyTagEnum } from '../enum/property.enum';
 
 @Injectable()
 export class PropertyDetailsRepository {
@@ -33,7 +34,8 @@ export class PropertyDetailsRepository {
                 images: JSON.stringify(addPropertyInfo.images),
                 video: addPropertyInfo.video ? addPropertyInfo.video : null,
                 status: addPropertyInfo.status,
-                addressId: addressDetails.id
+                addressId: addressDetails.id,
+                tag: addPropertyInfo.tag,
             });
             await PropertyFacilitiesEntity.create({
                 ...addPropertyInfo.facilities,

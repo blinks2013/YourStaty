@@ -2,7 +2,7 @@ import { IsArray, IsIn, IsInt, IsNotEmpty, IsOptional, IsString, IsUrl, MaxLengt
 import { PropertyAddressDto } from "./property_address.dto";
 import { PropertySpecificationDto } from "./property_specification.dto";
 import { FacilitiesDto } from "./facilities.dto";
-import { PropertyCategoryEnum, PropertyStatusEnum } from "../enum/property.enum";
+import { PropertyCategoryEnum, PropertyStatusEnum, PropertyTagEnum } from "../enum/property.enum";
 export class AddPropertyDto{
 
     @IsNotEmpty()
@@ -63,4 +63,10 @@ export class AddPropertyDto{
 
     @IsOptional()
     facilities: FacilitiesDto
+
+
+    @IsNotEmpty()
+    @IsIn([...Object.values(PropertyTagEnum)])
+    @IsString()
+    public tag: PropertyTagEnum
 }
