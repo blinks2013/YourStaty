@@ -14,7 +14,7 @@ import { RedisService } from './redis.service';
                     host: configService.get('redis.host'),
                     port: configService.get('redis.port'),
                     // username: configService.get('redis.username'),
-                    //password: configService.get('redis.password'),
+                    password: configService.get('redis.password'),
                 });
             },
         },

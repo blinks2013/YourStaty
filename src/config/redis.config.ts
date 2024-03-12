@@ -5,7 +5,8 @@ export default registerAs(
     (): Record<string, string | number | boolean | object> => ({
         redis: {
             host:process.env.REDIS_HOST,
-            port:process.env.REDIS_PORT
+            port:process.env.REDIS_PORT,
+            password:process.env.REDIS_PASSWORD
         },
     }),
 );
