@@ -10,12 +10,10 @@ import { RedisService } from './redis.service';
             provide: 'REDIS_CLIENT',
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => {
-                console.log("=======",configService.get('service.redis.host'))
                 return new Redis.Redis({
-                    host: configService.get('service.redis.host'),
-                    port: configService.get('service.redis.port'),
-                    // username: configService.get('redis.username'),
-                    password: configService.get('service.redis.password'),
+                    host:"172.31.7.78",
+                    port:6379,
+                    password:"ylYI932o9Wp9fH1CO9uL"
                 });
             },
         },
