@@ -11,14 +11,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
 
     if: github.ref == 'refs/heads/k8s-dev-deploy'
-
-    strategy:
-      matrix:
-        node-version: [14.x]
+    
 
     steps:
+      - name: List remote directory contents
+        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.9 'ls -al /home/ubuntu'
+      - name: Run deploy.sh
+        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 'bash /home/ubuntu/deploy.sh'
       - uses: actions/checkout@v2
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1
@@ -28,8 +30,5 @@ jobs:
           remote_path: /home/ubuntu
           remote_host: 15.207.24.98
           remote_user: ubuntu
-          remote_key: "${{ SSH_PRIVATE_KEY }}"
-      - name: List remote directory contents
-        run: ssh -o StrictHostKeyChecking=no -i ${{SSH_PRIVATE_KEY}} ubuntu@15.207.24.9 'ls -al /home/ubuntu'
-      - name: Run deploy.sh
-        run: ssh -o StrictHostKeyChecking=no -i ${{SSH_PRIVATE_KEY}} ubuntu@15.207.24.98 'bash /home/ubuntu/deploy.sh'
+          remote_key: "${{secrets.SSH_PRIVATE_KEY}}"
+     
