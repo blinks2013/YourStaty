@@ -1,34 +1,22 @@
-name: CI
+name: Deploy on Push to k8s-dev-deploy
+
 on:
- push:
-  branches: [k8s-dev-deploy]
- pull_request:
-  branches: [k8s-dev-deploy]
-  
- workflow_dispatch:
+  push:
+    branches:
+      - k8s-dev-deploy
 
 jobs:
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
-    
-
-    if: github.ref == 'refs/heads/k8s-dev-deploy'
-    
 
     steps:
-      #- name: List remote directory contents
-      #  run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 
-      #- name: Run deploy.sh
-      #  run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 'bash /home/ubuntu/deploy.sh'
-      - uses: actions/checkout@v2
-      - name: rsync deployments
-        uses: burnett01/rsync-deployments@5.1
-        with:
-          switches: -avzr --delete
-          path: ./*
-          remote_path: /home/ubuntu
-          remote_host: 15.207.24.98
-          remote_user: ubuntu
-          remote_key: "${{secrets.SSH_PRIVATE_KEY}}"
-     
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy to EC2
+      run: ssh ubuntu@YOUR_EC2_INSTANCE_IP 'bash -s' < /home/ubuntu/deploy.sh
