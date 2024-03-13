@@ -17,10 +17,10 @@ jobs:
     
 
     steps:
-      - name: List remote directory contents
-        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 
-      - name: Run deploy.sh
-        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 'bash /home/ubuntu/deploy.sh'
+      #- name: List remote directory contents
+      #  run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 
+      #- name: Run deploy.sh
+      #  run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 'bash /home/ubuntu/deploy.sh'
       - uses: actions/checkout@v2
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1
