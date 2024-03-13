@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: bash deploy.sh
+      - run: bash /home/ubuntu/deploy.sh
 
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1
