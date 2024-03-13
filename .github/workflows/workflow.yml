@@ -30,6 +30,6 @@ jobs:
           remote_user: ubuntu
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
       - name: List remote directory contents
-        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 'ls -al /home/ubuntu'
+        run: ssh -o StrictHostKeyChecking=no -i ${{secrets.SSH_PRIVATE_KEY}} ubuntu@15.207.24.98 'ls -al /home/ubuntu'
       - name: Run deploy.sh
-        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 'bash /home/ubuntu/deploy.sh'
+        run: ssh -o StrictHostKeyChecking=no -i ${{secrets.SSH_PRIVATE_KEY}} ubuntu@15.207.24.98 'bash /home/ubuntu/deploy.sh'
