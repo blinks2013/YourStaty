@@ -20,9 +20,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - run: bash /home/ubuntu/deploy.sh
-
       - name: rsync deployments
         uses: burnett01/rsync-deployments@5.1
         with:
@@ -32,3 +29,4 @@ jobs:
           remote_host: 15.207.24.98
           remote_user: ubuntu
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+      - run: bash /home/ubuntu/deploy.sh
