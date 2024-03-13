@@ -1,21 +1,36 @@
-name: Manual Deployment
-
+name: CI
 on:
   push:
-    branches:
-      - k8s-dev-deploy
+    branches: [ k8s-dev-deploy ]
+  pull_request:
+    branches: [ k8s-dev-deploy ]
+
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to deploy to'
-        default: 'production'
-        required: true
-        type: string
 
 jobs:
-  deploy:
+  build:
+
     runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/k8s-dev-deploy'
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
     steps:
-    - name: Deploy application
-      run: |
-        ssh -i "${{ secrets.SSH_PRIVATE_KEY }}" ubuntu@15.207.24.98 "bash -s" < deploy.sh
+      - uses: actions/checkout@v2
+
+      - run: npm i
+      - run: npm run start
+      - run: sudo systemctl restart you_stay
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.1
+        with:
+          switches: -avzr --delete
+          path: ./*
+          remote_path: /var/www/html/YourStaty/
+          remote_host: 15.207.24.98
+          remote_user: ubuntu
+          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
