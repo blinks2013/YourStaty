@@ -19,4 +19,4 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Deploy to EC2
-      run: ssh ubuntu@YOUR_EC2_INSTANCE_IP 'bash -s' < /home/ubuntu/deploy.sh
+      run: ssh ubuntu@15.207.24.98 'bash -s' < /home/ubuntu/deploy.sh
