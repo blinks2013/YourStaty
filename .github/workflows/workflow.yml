@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: List remote directory contents
-        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.9 
+        run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 
       - name: Run deploy.sh
         run: ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@15.207.24.98 'bash /home/ubuntu/deploy.sh'
       - uses: actions/checkout@v2
