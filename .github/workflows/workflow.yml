@@ -1,6 +1,9 @@
 name: Manual Deployment
 
 on:
+  push:
+    branches:
+      - k8s-dev-deploy
   workflow_dispatch:
     inputs:
       environment:
