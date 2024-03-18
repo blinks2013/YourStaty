@@ -1,6 +1,5 @@
 import { Column, DataType, HasOne, Model, Table } from 'sequelize-typescript';
 import { PropertyDetailsEntity } from './property_details.entity';
-import { table } from 'console';
 
 @Table({
     tableName: 'propertyAddress',

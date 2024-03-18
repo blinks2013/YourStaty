@@ -42,4 +42,8 @@ export class PropertyService {
     async getPropertyRatingService(id:string){
         return await this.propertyReviewRepository.getRatingAndReview(id)
     }
+
+    // async propertyBookingService(){
+        
+    // }
 }

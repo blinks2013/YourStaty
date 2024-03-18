@@ -71,6 +71,9 @@ export class PropertyDetailsRepository {
                     model: PropertyAddressEntity,
                     as: 'propertyAddress',
                     where: sequelize.where(haversineFormula, '<=', distance),
+                },
+                {
+                    model: PropertySpecificationEntity,
                 }
             ],
             where: {

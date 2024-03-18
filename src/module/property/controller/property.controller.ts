@@ -4,6 +4,7 @@ import { PropertyService } from '../service/property.service';
 import { FilterDto } from '../dto/filters.dto';
 import { RatingAndReviewDto } from '../dto/rating_and_review.dto';
 import { IsUUidOrNotDto } from '../dto/check_id_is_uuid.dto';
+import { PropertyBookingDto } from '../dto/property_booking.dto';
 
 @Controller()
 export class PropertyController {
@@ -34,5 +35,10 @@ export class PropertyController {
             message:'Rating and review of property',
             data:ratingDetails
         }
+    }
+
+    @Post('/booking')
+    async propertyBookingController(@Body() bookingDetails:PropertyBookingDto){
+        console.log("=======",bookingDetails)
     }
 }
