@@ -1,0 +1,13 @@
+name: Deploy on k8s-dev-deploy runner
+
+on:
+  push:
+    branches:
+      - k8s-dev-deploy
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Run deploy.sh on k8s-dev-deploy runner
+        run: /home/ubuntu/deploy.sh
